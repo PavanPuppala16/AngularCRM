@@ -4,8 +4,12 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 
+
+
 namespace WebApplicationCRM.Controllers
 {
+
+
 
     [ApiController]
     [Route("api/[Controller]")]
@@ -25,12 +29,16 @@ namespace WebApplicationCRM.Controllers
         }
         [HttpGet]
         [Route("GetaccountbyId")]
-        public async Task<IEnumerable<Accounts>> GetaccountbyId(int? recordid)
+        public async Task<IEnumerable<Accounts>> GetaccountbyId(int? accountid)
         {
-            var param = new SqlParameter("@recordid", recordid);
+            var param = new SqlParameter("@accountid", accountid);
+
+
 
             var AccountDetails = await Task.Run(() => dbcontext.account
-                            .FromSqlRaw(@"exec GetAllDataByIDAccounts @recordid", param).ToListAsync());
+                            .FromSqlRaw(@"exec GetAllDataByIDAccounts @accountid", param).ToListAsync());
+
+
 
             return AccountDetails;
         }
@@ -40,48 +48,79 @@ namespace WebApplicationCRM.Controllers
         {
             var parameter = new List<SqlParameter>();
             //parameter.Add(new SqlParameter("@recordid", accounts.recordid));
-            parameter.Add(new SqlParameter("@companyname", accounts.companyname));
-            parameter.Add(new SqlParameter("@typeofcompany", accounts.typeofcompany));
+
+
+
+            parameter.Add(new SqlParameter("@accountname", accounts.accountname));
+            parameter.Add(new SqlParameter("@typeofaccount", accounts.typeofaccount));
             parameter.Add(new SqlParameter("@emailid", accounts.emailid));
-            parameter.Add(new SqlParameter("@companyphoneno", accounts.companyphoneno));
+            parameter.Add(new SqlParameter("@accountphoneno", accounts.accountphoneno));
+            parameter.Add(new SqlParameter("@primarycontact", accounts.primarycontact));
             parameter.Add(new SqlParameter("@jobsdescription", accounts.jobsdescription));
+            parameter.Add(new SqlParameter("@statustype", accounts.statustype));
+            parameter.Add(new SqlParameter("@type", accounts.type));
             parameter.Add(new SqlParameter("@noofbranches", accounts.noofbranches));
             parameter.Add(new SqlParameter("@branchaddress", accounts.branchaddress));
             parameter.Add(new SqlParameter("@noofemployees", accounts.noofemployees));
-            parameter.Add(new SqlParameter("@companyaddress", accounts.companyaddress));
+            parameter.Add(new SqlParameter("@accountaddress", accounts.accountaddress));
             parameter.Add(new SqlParameter("@linkedinurl", accounts.linkedinurl));
             parameter.Add(new SqlParameter("@companywebsite", accounts.companywebsite));
-            parameter.Add(new SqlParameter("@status", accounts.status));
+            parameter.Add(new SqlParameter("@accountowner", accounts.accountowner));
+            parameter.Add(new SqlParameter("@accountstatus", accounts.accountstatus));
+
+
+
+
 
 
             var result = await Task.Run(() => dbcontext.Database
-           .ExecuteSqlRawAsync(@"exec Accountinsertion @companyname,@typeofcompany,@emailid,@companyphoneno,@jobsdescription,@noofbranches,@branchaddress,@noofemployees,@companyaddress,@linkedinurl,@companywebsite,@status", parameter.ToArray()));
+           .ExecuteSqlRawAsync(@"exec Accountinsertion @accountname,@typeofaccount,@emailid,@accountphoneno,@primarycontact,@jobsdescription,
+@statustype,@type,@noofbranches,@branchaddress,@noofemployees,@accountaddress,@linkedinurl,@companywebsite,@accountowner,@accountstatus", parameter.ToArray()));
+
+
 
             return result;
         }
         [HttpPut]
         [Route("Update")]
 
+
+
         public async Task<int> Update(Accounts accounts)
         {
             var parameter = new List<SqlParameter>();
-            parameter.Add(new SqlParameter("@recordid", accounts.recordid));
-            parameter.Add(new SqlParameter("@companyname", accounts.companyname));
-            parameter.Add(new SqlParameter("@typeofcompany", accounts.typeofcompany));
+
+
+
+            parameter.Add(new SqlParameter("@accountid", accounts.accountid));
+            parameter.Add(new SqlParameter("@accountname", accounts.accountname));
+            parameter.Add(new SqlParameter("@typeofaccount", accounts.typeofaccount));
             parameter.Add(new SqlParameter("@emailid", accounts.emailid));
-            parameter.Add(new SqlParameter("@companyphoneno", accounts.companyphoneno));
+            parameter.Add(new SqlParameter("@accountphoneno", accounts.accountphoneno));
+            parameter.Add(new SqlParameter("@primarycontact", accounts.primarycontact));
             parameter.Add(new SqlParameter("@jobsdescription", accounts.jobsdescription));
+            parameter.Add(new SqlParameter("@statustype", accounts.statustype));
+            parameter.Add(new SqlParameter("@type", accounts.type));
             parameter.Add(new SqlParameter("@noofbranches", accounts.noofbranches));
             parameter.Add(new SqlParameter("@branchaddress", accounts.branchaddress));
             parameter.Add(new SqlParameter("@noofemployees", accounts.noofemployees));
-            parameter.Add(new SqlParameter("@companyaddress", accounts.companyaddress));
+            parameter.Add(new SqlParameter("@accountaddress", accounts.accountaddress));
             parameter.Add(new SqlParameter("@linkedinurl", accounts.linkedinurl));
             parameter.Add(new SqlParameter("@companywebsite", accounts.companywebsite));
-            parameter.Add(new SqlParameter("@status", accounts.status));
+            parameter.Add(new SqlParameter("@accountowner", accounts.accountowner));
+            parameter.Add(new SqlParameter("@accountstatus", accounts.accountstatus));
+            parameter.Add(new SqlParameter("@insertiondate", accounts.insertiondate));
+
+
+
+
 
 
             var result = await Task.Run(() => dbcontext.Database
-           .ExecuteSqlRawAsync(@"exec updateAccounts @recordid, @companyname,@typeofcompany,@emailid,@companyphoneno,@jobsdescription,@noofbranches,@branchaddress,@noofemployees,@companyaddress,@linkedinurl,@companywebsite,@status", parameter.ToArray()));
+           .ExecuteSqlRawAsync(@"exec updateAccounts @accountid,@accountname,@typeofaccount,@emailid,@accountphoneno,@primarycontact,@jobsdescription,
+@statustype,@type,@noofbranches,@branchaddress,@noofemployees,@accountaddress,@linkedinurl,@companywebsite,@accountowner,@accountstatus,@insertiondate", parameter.ToArray()));
+
+
 
             return result;
         }

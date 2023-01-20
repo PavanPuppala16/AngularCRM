@@ -16,6 +16,11 @@ builder.Services.AddDbContext<Databasecontext>(options =>
 {
     options.UseSqlServer(connectionString);
 });
+builder.Services.AddCors(cors => cors.AddPolicy("MyPolicy", builder =>
+{
+    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+}));
+
 
 var app = builder.Build();
 
@@ -29,6 +34,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseCors("MyPolicy");
 
 app.MapControllers();
 
