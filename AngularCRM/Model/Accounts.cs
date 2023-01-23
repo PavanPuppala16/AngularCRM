@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-[15:40] Anil Bobbili - Fixity
-using System.ComponentModel.DataAnnotations;
  
 namespace AngularCRM.Model
 {

@@ -20,5 +20,9 @@ namespace AngularCRM.Model
 
         public virtual DbSet<Notes> Notes { get; set; }
 
+
+
+        public virtual DbSet<Opportunities> Opportunities { get; set; }
+
     }
 }
