@@ -39,7 +39,7 @@ namespace AngularCRM.Controllers
 
         [HttpPost]
         [Route("Insert")]
-        public async Task<int> Insert(EmployeeRegistration EmployeeRegistration)
+        public async Task<int> Insert(EmployeeRegistrationUpdate EmployeeRegistration)
         {
             var parameter = new List<SqlParameter>();
             parameter.Add(new SqlParameter("@firstname", EmployeeRegistration.FirstName));
@@ -54,7 +54,7 @@ namespace AngularCRM.Controllers
             parameter.Add(new SqlParameter("@picture", EmployeeRegistration.Picture));
             parameter.Add(new SqlParameter("@doj ", EmployeeRegistration.DOJ));
             parameter.Add(new SqlParameter("@password", EmployeeRegistration.Password));
-            parameter.Add(new SqlParameter("@status", EmployeeRegistration.Status));
+            parameter.Add(new SqlParameter("@status", Convert.ToInt32(EmployeeRegistration.Status)));
             var result = await Task.Run(() => dbcontext.Database
          .ExecuteSqlRawAsync(@"exec EmployeeDetailsInsertion @firstname,@lastname,@dob,@emailid,@mobile, @gender,@address,@designation,@typeofwork,@picture,@doj,@password,@status", parameter.ToArray()));
             return result;
@@ -79,7 +79,7 @@ namespace AngularCRM.Controllers
             parameter.Add(new SqlParameter("@picture", EmployeeRegistration.Picture));
             parameter.Add(new SqlParameter("@doj ", EmployeeRegistration.DOJ));
             parameter.Add(new SqlParameter("@password", EmployeeRegistration.Password));
-            parameter.Add(new SqlParameter("@status", EmployeeRegistration.Status));
+            parameter.Add(new SqlParameter("@status", Convert.ToInt32(EmployeeRegistration.Status)));
             var result = await Task.Run(() => dbcontext.Database
         .ExecuteSqlRawAsync(@"exec updateEmployeeRegistraiton @firstname,@lastname,@dob,@emailid,@mobile,@gender,@address,@designation,@typeofwork,@picture,@doj,@password,@status,@recordid", parameter.ToArray()));
             return result;
@@ -91,4 +91,5 @@ namespace AngularCRM.Controllers
             return await Task.Run(() => dbcontext.Database.ExecuteSqlInterpolatedAsync($"DeleteEmployeeRegitration {recordid}"));
         }
     }
+
 }

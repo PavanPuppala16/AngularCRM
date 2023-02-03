@@ -65,7 +65,7 @@ namespace AngularCRM.Controllers
 
                             emp.Password = dt.Rows[0]["Password"].ToString();
                             emp.DOJ = Convert.ToDateTime(dt.Rows[0]["DOJ"].ToString());
-                            emp.Status = Convert.ToBoolean(dt.Rows[0]["Status"].ToString());
+                            emp.Status = Convert.ToInt32(dt.Rows[0]["Status"].ToString());
                             emp.insertiondate = Convert.ToDateTime(dt.Rows[0]["insertiondate"].ToString());
                             emp.result.result = true;
                             emp.result.message = "success";

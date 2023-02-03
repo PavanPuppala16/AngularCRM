@@ -44,7 +44,7 @@ namespace AngularCRM.Controllers
         public async Task<int> Addcontact(Contacts contacts)
         {
             var parameter = new List<SqlParameter>();
-            parameter.Add(new SqlParameter("@accountid", contacts.accountid));
+            parameter.Add(new SqlParameter("@accountname", contacts.accountname));
             parameter.Add(new SqlParameter("@personname", contacts.personname));
             parameter.Add(new SqlParameter("@emailid", contacts.emailid));
             parameter.Add(new SqlParameter("@mobile", contacts.mobile));
@@ -57,7 +57,7 @@ namespace AngularCRM.Controllers
             parameter.Add(new SqlParameter("@remarks", contacts.remarks));
 
             var result = await Task.Run(() => _dbContext.Database
-            .ExecuteSqlRawAsync(@"exec ContactsInsertion  @accountid, @personname,@emailid,@mobile,@designation,@workexperiance,@contactsource,@contacttype,@linkedinurl,@dateofcontacted,@remarks", parameter.ToArray()));
+            .ExecuteSqlRawAsync(@"exec ContactsInsertion  @accountname, @personname,@emailid,@mobile,@designation,@workexperiance,@contactsource,@contacttype,@linkedinurl,@dateofcontacted,@remarks", parameter.ToArray()));
 
             return result;
         }
@@ -68,7 +68,7 @@ namespace AngularCRM.Controllers
             var parameter = new List<SqlParameter>();
 
             parameter.Add(new SqlParameter("@recordid", contacts.recordid));
-            parameter.Add(new SqlParameter("@accountid", contacts.accountid));
+            parameter.Add(new SqlParameter("@accountname", contacts.accountname));
             parameter.Add(new SqlParameter("@personname", contacts.personname));
             parameter.Add(new SqlParameter("@emailid", contacts.emailid));
             parameter.Add(new SqlParameter("@mobile", contacts.mobile));
@@ -81,7 +81,7 @@ namespace AngularCRM.Controllers
             parameter.Add(new SqlParameter("@remarks", contacts.remarks));
 
             var result = await Task.Run(() => _dbContext.Database
-            .ExecuteSqlRawAsync(@"exec updateContacts @recordid,@accountid,@personname,@emailid,@mobile,@designation,@workexperiance,@contactsource,@contacttype,@linkedinurl,@dateofcontacted,@remarks", parameter.ToArray()));
+            .ExecuteSqlRawAsync(@"exec updateContacts @recordid,@accountname,@personname,@emailid,@mobile,@designation,@workexperiance,@contactsource,@contacttype,@linkedinurl,@dateofcontacted,@remarks", parameter.ToArray()));
 
             return result;
         }

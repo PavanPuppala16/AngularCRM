@@ -9,6 +9,9 @@ namespace AngularCRM.Model
 {
     public class Databasecontext : DbContext
     {
+        public Databasecontext()
+        {
+        }
 
         public Databasecontext(DbContextOptions<Databasecontext> options) : base(options)
         { }
@@ -22,7 +25,9 @@ namespace AngularCRM.Model
 
 
 
-        public virtual DbSet<Opportunities> Opportunities { get; set; }
+        public virtual DbSet<Opportunity> Opportunities { get; set; }
+        public virtual DbSet<dbtask> dbtask { get; set; }
+        public virtual DbSet<Leadmodel> Leads { get; set; }
 
     }
 }

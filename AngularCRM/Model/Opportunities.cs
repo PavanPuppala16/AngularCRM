@@ -1,23 +1,42 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AngularCRM.Model
 {
-    public class Opportunities
+    [Table("Opportunity")]
+    public class Opportunity
     {
         [Key]
         public int ID { get; set; }
+        public string OPPONo { get; set; }
         public string Name { get; set; }
-        public string OWNER { get; set; }
+        public string OpportunityOwner { get; set; }
         public string WORKFLOW { get; set; }
         public string ACCNAME { get; set; }
+
         public string CREATEFOR { get; set; }
         public int AMOUNT { get; set; }
         public DateTime CLOSEDATE { get; set; }
         public string PRIORITYTYPE { get; set; }
         public string OPPORTUNITYSOURCE { get; set; }
         public string DESCRIPTION { get; set; }
-        public string SOURCEOFCREATION { get; set; }
-        public string PRODUCT { get; set; }
-        public string UNITS { get; set; }
+    }
+
+    public class OpportunityInup
+    {
+        [Key]
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string OpportunityOwner { get; set; }
+        public string WORKFLOW { get; set; }
+        public string ACCNAME { get; set; }
+
+        public string CREATEFOR { get; set; }
+        public int AMOUNT { get; set; }
+        public DateTime CLOSEDATE { get; set; }
+        public string PRIORITYTYPE { get; set; }
+        public string OPPORTUNITYSOURCE { get; set; }
+        public string DESCRIPTION { get; set; }
     }
 }
+

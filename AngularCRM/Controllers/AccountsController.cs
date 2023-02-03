@@ -20,6 +20,24 @@ namespace WebApplicationCRM.Controllers
         {
             this.dbcontext = dbcontext;
         }
+
+    //    [Route("GetAccountCount")]
+    //    [HttpGet]
+    //    public int GetAccountsCount()
+    //    {
+    //        using (SqlConnection connection = new SqlConnection("connectionString"))
+    //        {
+    //            connection.Open();
+
+    //            using (SqlCommand command = new SqlCommand("SELECT COUNT(ID) FROM Accounts", connection))
+    //            {
+    //                return (int)command.ExecuteScalar();
+    //            }
+               
+    //        }
+
+        
+    //}
         [HttpGet]
         public Task<List<Accounts>> GetAlldata()
         {

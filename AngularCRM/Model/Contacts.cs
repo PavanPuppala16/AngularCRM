@@ -7,7 +7,7 @@ namespace AngularCRM.Model
         [Key]
         public int recordid { get; set; }
 
-        public int accountid { get; set; }
+        public string accountname { get; set; }
 
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please Provide First Name")]
@@ -38,6 +38,12 @@ namespace AngularCRM.Model
         [Required]
         public DateTime dateofcontacted { get; set; }
         [Required]
+
+
+
+
+
+
         public string remarks { get; set; }
     }
 }
